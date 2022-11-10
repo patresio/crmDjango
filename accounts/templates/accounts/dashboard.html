@@ -44,7 +44,7 @@
       {% for order in orders %}
       <tr>
         <td>{{order.product}}</td>
-        <td>{{order.date_created}}</td>
+        <td>{{order.date_created|date:'d/m/Y'}}</td>
         <td>{{order.status}}</td>
         <td>
           <a

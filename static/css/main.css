@@ -1,0 +1,19 @@
+body {
+  background-color: #ebeff5;
+}
+
+.adjusting-pad {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+  padding-top: 0.625rem;
+}
+
+#total-order {
+  background-color: #4cb4c7;
+}
+#orders-delivered {
+  background-color: #7abecc;
+}
+#orders-pending {
+  background-color: #7cd1c0;
+}

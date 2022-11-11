@@ -47,16 +47,6 @@ def customer(request, pk_test):
     return render(request, 'accounts/customer.html', context)
 
 
-
-
-def products(request):
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'accounts/products.html', context)
-
-
-
-
 def createOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status', 'note'), extra=10)
     customer = Customer.objects.get(id=pk)
@@ -87,7 +77,7 @@ def updateOrder(request, pk):
             return redirect('/')
 
     context = {'form': form}
-    return render(request, 'accounts/order_form.html', context)
+    return render(request, 'accounts/update_form.html', context)
 
 
 def deleteOrder(request, pk):
@@ -97,3 +87,19 @@ def deleteOrder(request, pk):
         return redirect('/')
     context = {'item': order}
     return render(request, 'accounts/delete.html', context)
+
+# Products
+
+def products(request):
+    form = ProductForm()
+    products = Product.objects.all()
+    context = {'products': products, 'form': form,}
+    return render(request, 'accounts/products.html', context)
+
+
+def createProduct(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('products')

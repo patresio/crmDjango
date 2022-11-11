@@ -3,7 +3,21 @@
 <div class="row">
   <div class="col-md">
     <div class="card card-body">
-      <h5>Products</h5>
+      <div class="row justify-content-between">
+        <div class="col-4">
+          <h5>Products</h5>
+        </div>
+        <div class="col-4">
+          <button
+            type="button"
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#modalProduct"
+          >
+            New Product
+          </button>
+        </div>
+      </div>
     </div>
     <div class="card card-body">
       <table class="table">
@@ -20,6 +34,37 @@
         </tr>
         {% endfor %}
       </table>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" tabindex="-1" id="modalProduct">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Product</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form action="{% url 'create_product' %}" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">{{form}}</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <input type="submit" class="btn btn-primary" value="Save changes" />
+        </div>
+      </form>
     </div>
   </div>
 </div>

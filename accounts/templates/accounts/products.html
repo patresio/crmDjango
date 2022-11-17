@@ -53,7 +53,7 @@
       </div>
       <form action="{% url 'create_product' %}" method="POST">
         {% csrf_token %}
-        <div class="modal-body">{{form}}</div>
+        <div class="modal-body">{{form.as_p}}</div>
         <div class="modal-footer">
           <button
             type="button"
@@ -62,7 +62,7 @@
           >
             Close
           </button>
-          <input type="submit" class="btn btn-primary" value="Save changes" />
+          <input type="submit" class="btn btn-primary" value="Save Product" />
         </div>
       </form>
     </div>

@@ -1,12 +1,28 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
-# Create your views here.
+
 from .models import *
-from .forms import *
-from .filters import *
+from .forms import OrderForm, ProductForm, CreateFormUser
+from .filters import OrderFilter
 
 
+#LoginPages
+def loginPage(request):
+    context = {}
+    return render(request, 'accounts/login_page.html', context)
+
+def registerPage(request):
+    form = CreateFormUser()
+
+    if request.method == 'POST':
+        form = CreateFormUser(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {'form': form}
+    return render(request, 'accounts/register_page.html', context)
+
+# Dashboard
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
@@ -50,11 +66,9 @@ def customer(request, pk_test):
 def createOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status', 'note'), extra=10)
     customer = Customer.objects.get(id=pk)
-    #form = OrderForm(initial={'customer': customer})
     formset = OrderFormSet(queryset=Order.objects.none(),instance=customer)
     if request.method == 'POST':
         formset = OrderFormSet(request.POST,instance=customer)
-        #form = OrderForm(request.POST)
         if formset.is_valid():
             formset.save()
             return redirect('/')
@@ -66,7 +80,6 @@ def createOrder(request, pk):
 
 def updateOrder(request, pk):
     form = OrderForm()
-
     order  = Order.objects.get(id=pk)
     form = OrderForm(instance=order)
 

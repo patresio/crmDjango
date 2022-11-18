@@ -104,9 +104,9 @@ def deleteOrder(request, pk):
 # Products
 
 def products(request):
-    form = ProductForm()
+    forms = ProductForm()
     products = Product.objects.all()
-    context = {'products': products, 'form': form,}
+    context = {'products': products, 'forms': forms,}
     return render(request, 'accounts/products.html', context)
 
 

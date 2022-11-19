@@ -19,6 +19,8 @@ def registerPage(request):
         form = CreateFormUser(request.POST)
         if form.is_valid():
             form.save()
+            print(form)
+
     context = {'form': form}
     return render(request, 'accounts/register_page.html', context)
 

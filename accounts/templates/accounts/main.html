@@ -21,11 +21,13 @@
     <link rel="stylesheet" href="{% static '/css/main.css' %}" class="" />
   </head>
   <body>
-    {% include 'accounts/navbar.html' %}
-    <section class="content row adjusting-pad">
-      {% block content %}{% endblock %}
-    </section>
-    {% include 'accounts/footer.html' %}
+    <div class="color-container">
+      {% include 'accounts/navbar.html' %}
+      <section class="content row adjusting-pad">
+        {% block content %}{% endblock %}
+      </section>
+      {% include 'accounts/footer.html' %}
+    </div>
   </body>
   <!-- JavaScript Bundle with Popper -->
   <script

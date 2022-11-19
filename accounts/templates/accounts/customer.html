@@ -36,13 +36,11 @@
     </div>
   </div>
 </div>
-<div class="container">
 <div class="row"><p></p></div>
 <div class="row">
   <div class="col">
     <div class="card card-body">
-      <form method="get">
-        
+      <form method="get">     
           <div class="row g-3">
             <div class="col-sm-4">
               {{myFilter.form.product.label}}{{myFilter.form.product}}
@@ -71,55 +69,54 @@
       </form>
     </div>
   </div>
-</div>
-</div>
-<br />
-<div class="container">
-  <div class="row"><p></p></div>
-<div class="row">
-  <div class="col-md">
-    <div class="card card-body">
-      <table class="table table-sm">
-        <tr>
-          <th>Product</th>
-          <th>Note</th>
-          <td>Status</td>
-          <th>Date Orderd</th>
-          <th>Status</th>
-          <th>Update</th>
-          <th>Remove</th>
-        </tr>
-        {% for order in orders %} {% if not forloop.counter|is_par %}
-        <tr class="tabela-linha-cor">
-          {% else %}
-        </tr>
 
-        <tr class="tabela-linha">
-          {% endif %}
-          <td>{{order.product.name}}</td>
-          <td>{{order.note}}</td>
-          <td>{{order.status}}</td>
-          <td>{{order.date_created|date:'d/m/Y'}}</td>
-          <td>{{order.status}}</td>
-          <td>
-            <a
-              href="{% url 'update_order' order.id %}"
-              class="btn btn-primary btn-sm"
-              ><i class="bi bi-cloud-arrow-up-fill"></i> Update</a
-            >
-          </td>
-          <td>
-            <a
-              href="{% url 'delete_order' order.id %}"
-              class="btn btn-danger btn-sm"
-              ><i class="bi bi-trash-fill"></i> Delete</a
-            >
-          </td>
-        </tr>
-        {% endfor %}
-      </table>
+  <div class="row"><p></p></div>
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <table class="table table-sm">
+          <tr>
+            <th>Product</th>
+            <th>Note</th>
+            <td>Status</td>
+            <th>Date Orderd</th>
+            <th>Status</th>
+            <th>Update</th>
+            <th>Remove</th>
+          </tr>
+          {% for order in orders %} {% if not forloop.counter|is_par %}
+          <tr class="tabela-linha-cor">
+            {% else %}
+          </tr>
+
+          <tr class="tabela-linha">
+            {% endif %}
+            <td>{{order.product.name}}</td>
+            <td>{{order.note}}</td>
+            <td>{{order.status}}</td>
+            <td>{{order.date_created|date:'d/m/Y'}}</td>
+            <td>{{order.status}}</td>
+            <td>
+              <a
+                href="{% url 'update_order' order.id %}"
+                class="btn btn-primary btn-sm"
+                ><i class="bi bi-cloud-arrow-up-fill"></i> Update</a
+              >
+            </td>
+            <td>
+              <a
+                href="{% url 'delete_order' order.id %}"
+                class="btn btn-danger btn-sm"
+                ><i class="bi bi-trash-fill"></i> Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
     </div>
   </div>
+  <div class="row"><p></p></div>
 </div>
 </div>
 

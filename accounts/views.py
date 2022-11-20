@@ -16,21 +16,15 @@ from .filters import OrderFilter
 
 #LoginPages
 def loginPage(request):
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
-        print(username, password)
-
         user = authenticate(request, username=username, password=password)
-
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
             messages.add_message(request, constants.ERROR, 'Username OR Password incorrect')
-
     context = {}
     return render(request, 'accounts/login_page.html', context)
 
@@ -39,17 +33,24 @@ def logoutPage(request):
     return redirect('login')
 
 def registerPage(request):
-    form = CreateFormUser()
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        form = CreateFormUser()
+        if request.method == 'POST':
+            form = CreateFormUser(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.add_message(request, constants.SUCCESS, 'Account was created for ' + user)
+                return redirect('login')
+        context = {'form': form}
+        return render(request, 'accounts/register_page.html', context)
 
-    if request.method == 'POST':
-        form = CreateFormUser(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.add_message(request, constants.SUCCESS, 'Account was created')
-            return redirect('login')
-
-    context = {'form': form}
-    return render(request, 'accounts/register_page.html', context)
+# UserPage
+def userPage(request):
+    context = {}
+    return render(request, 'accounts/user_page.html', context)
 
 # Dashboard
 @login_required(login_url='login')

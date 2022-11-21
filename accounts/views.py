@@ -70,6 +70,12 @@ def userPage(request):
     }
     return render(request, 'accounts/user.html', context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def accountSettings(request):
+    context = {}
+    return render(request, 'accounts/account_settings.html', context)
+
 # Dashboard
 @login_required(login_url='login')
 @admin_only

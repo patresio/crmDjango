@@ -1,6 +1,35 @@
-{% extends 'accounts/main.html' %} {% block content %} {% include
-'accounts/status.html' %}
+{% extends 'accounts/main.html' %}{% load filtro %}{% block content %}
+<p></p>
+{% include 'accounts/status.html' %}
 
-<h3>User Profile</h3>
+<div class="row">
+  <div class="col-md">
+    <div class="card card-body">
+      <table class="table table-sm">
+        <tr>
+          <th>Product</th>
+          <th>Note</th>
+          <td>Status</td>
+          <th>Date Orderd</th>
+          <th>Status</th>
+        </tr>
+        {% for order in orders %} {% if not forloop.counter|is_par %}
+        <tr class="tabela-linha-cor">
+          {% else %}
+        </tr>
+
+        <tr class="tabela-linha">
+          {% endif %}
+          <td>{{order.product.name}}</td>
+          <td>{{order.note}}</td>
+          <td>{{order.status}}</td>
+          <td>{{order.date_created|date:'d/m/Y'}}</td>
+          <td>{{order.status}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

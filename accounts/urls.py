@@ -11,7 +11,7 @@ urlpatterns = [
     path('account/', views.accountSettings, name="account"),
     #dashboard
     path('', views.home, name='home'),
-    path('customer/<str:pk_test>', views.customer, name='customer'),
+    path('customer/<str:pk>', views.customer, name='customer'),
     path('products/', views.products, name='products'),
     #orders
     path('create_order/<str:pk>/', views.createOrder, name='create_order'),
@@ -20,3 +20,10 @@ urlpatterns = [
     #products
     path('create_product/', views.createProduct, name='create_product'),
 ]
+
+'''
+1 - Submit email form                       //PasswordResetView.as_view()
+2 - Email sent success messages             //PasswordResetDoneView.as_view()
+3 - Link to password Rest form in email     //PasswordResetConfirmView.as_view()
+4 - Password successfully changed message   //PasswordResetCompleteView.as_view()
+'''

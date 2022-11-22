@@ -28,11 +28,20 @@
   <div class="col-md-9">
     <div class="card card-body">
       <form method="POST" action="" enctype="multipart/form-data">
-        <input
-          class="btn btn-primary"
-          type="submit"
-          name="Update Information"
-        />
+        {% csrf_token %}
+        <div class="row">{{form.name.label}}{{form.name}}</div>
+        <div class="row">{{form.phone.label}}{{form.phone}}</div>
+        <div class="row">{{form.email.label}}{{form.email}}</div>
+        <div class="row">{{form.profile_pic}}</div>
+        <br />
+        <div class="row col-md-3">
+          <input
+            class="btn btn-primary"
+            type="submit"
+            name="Update Information"
+            value="Submit"
+          />
+        </div>
       </form>
     </div>
   </div>

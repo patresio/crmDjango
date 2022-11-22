@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.messages import constants
 
 from .models import *
-from .forms import OrderForm, ProductForm, CreateFormUser
+from .forms import OrderForm, ProductForm, CreateFormUser, CustomerForm
 from .filters import OrderFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
@@ -44,9 +44,6 @@ def registerPage(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            group = Group.objects.get(name='customer')
-            user.groups.add(group)
-
             messages.add_message(request, constants.SUCCESS, 'Account was created for ' + username)
             return redirect('login')
     context = {'form': form}
@@ -73,7 +70,17 @@ def userPage(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['customer'])
 def accountSettings(request):
-    context = {}
+    customer = request.user.customer
+    form = CustomerForm(instance=customer)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+
+    context = {
+        'form': form,
+        }
     return render(request, 'accounts/account_settings.html', context)
 
 # Dashboard
@@ -103,8 +110,8 @@ def home(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def customer(request, pk_test):
-    customer = Customer.objects.get(id=pk_test)
+def customer(request, pk):
+    customer = Customer.objects.get(id=pk)
     orders = customer.order_set.all()
     total_orders = orders.count()
 

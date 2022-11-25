@@ -118,13 +118,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 MEDIA_URL = '/images/'
 
+""" 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images') """
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -151,32 +153,10 @@ EMAIL_HOST_PASSWORD = '*********'
 
 
 # S3 BUCKETS CONFIG
-""" AWS_S3_ACCESS_KEY_ID = 'AKIATZWULFTN2IVXQB5I'
-AWS_S3_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'patrese-crm1-bucket'
+AWS_ACCESS_KEY_ID = 'AKIATZWULFTNZQFENRQF'
+AWS_S3_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'crmdjango-bucket'
 
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage' """
-
-'''
-Configuration CORS AWS
-
-[
-    {
-        "AllowedHeaders": [
-            "*"
-        ],
-        "AllowedMethods": [
-            "POST",
-            "GET",
-            "PUT"
-        ],
-        "AllowedOrigins": [
-            "*"
-        ]
-    }
-]
-'''

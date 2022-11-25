@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     #otherAPPS
     'django_filters',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -73,10 +74,10 @@ WSGI_APPLICATION = 'crmDjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DEMO_TEST',
-        'USER': 'postgres',
-        'PASSWORD': 'Conficker2009',
-        'HOST': 'localhost',
+        'NAME': 'demo_1',
+        'USER': 'patrese',
+        'PASSWORD': 'Conficker*2009',
+        'HOST': 'database-1.cvyyzcy2pspj.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -147,3 +148,35 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'patresio@gmail.com'
 EMAIL_HOST_PASSWORD = 'Tatuzinho13'
+
+
+# S3 BUCKETS CONFIG
+""" AWS_S3_ACCESS_KEY_ID = 'AKIATZWULFTN2IVXQB5I'
+AWS_S3_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'patrese-crm1-bucket'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage' """
+
+'''
+Configuration CORS AWS
+
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "POST",
+            "GET",
+            "PUT"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ]
+    }
+]
+'''
